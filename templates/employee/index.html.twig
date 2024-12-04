@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Taysir Company - My employees{% endblock %}
+
+{% block body %}
+    <h1>My employees ✅</h1>
+    {% for employee in employees %}
+        <p> {{employee.fName}} ✅</p>
+    {% endfor %}
+{% endblock %}
