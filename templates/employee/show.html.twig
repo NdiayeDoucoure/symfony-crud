@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Taysir Company - Détails de l'employé
+{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Détails de l'employé</h1>
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h3 class="card-title text-primary">{{ employee.fName }} {{ employee.lName }}</h3>
+                <p class="card-text">
+                    <strong>Adresse :</strong> {{ employee.address }}
+                </p>
+                <p class="card-text">
+                    <strong>Numéro de téléphone :</strong> {{ employee.phoneNumber }}
+                </p>
+                <div class="text-end">
+                    <a href="{{ path('app_employee_edit', {id: employee.id}) }}" class="btn btn-warning">Modifier</a>
+                    <a href="{{ path('app_employee') }}" class="btn btn-secondary">Retour à la liste</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

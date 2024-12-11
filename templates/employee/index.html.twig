@@ -1,10 +1,47 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Taysir Company - My employees{% endblock %}
+{% block title %}Taysir Company - Mes employés{% endblock %}
 
 {% block body %}
-    <h1>My employees ✅</h1>
-    {% for employee in employees %}
-        <p> {{employee.fName}} ✅</p>
-    {% endfor %}
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Liste des employés</h1>
+        <div class="text-end mb-3">
+            <a href="{{ path('app_employee_new') }}" class="btn btn-primary">Ajouter un nouvel employé</a>
+        </div>
+        <table class="table table-striped table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Adresse</th>
+                    <th>Téléphone</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for employee in employees %}
+                    <tr>
+                        <td>{{ employee.id }}</td>
+                        <td>{{ employee.fName }}</td>
+                        <td>{{ employee.lName }}</td>
+                        <td>{{ employee.address }}</td>
+                        <td>{{ employee.phoneNumber }}</td>
+                        <td>
+                            <a href="{{ path('app_employee_show', {id: employee.id}) }}" class="btn btn-info btn-sm">Voir</a>
+                            <a href="{{ path('app_employee_edit', {id: employee.id}) }}" class="btn btn-warning btn-sm">Modifier</a>
+                            <form method="post" action="{{ path('app_employee_delete', {id: employee.id}) }}" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr ?');">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ employee.id) }}">
+                                <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6" class="text-center">Aucun employé trouvé.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
